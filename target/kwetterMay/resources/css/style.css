@@ -1,0 +1,144 @@
+body{
+    background-color:dimgrey; /*#f8f8f8;*/
+    background-size: 10%;
+    /*background-image: url('../images/Varken.png'); /*'/javax.faces.resource/images/someName.png.xhtml'*/
+}
+
+p, label{
+    font-size: 11pt;
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+}
+
+h1{
+    font-size: 15pt;
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+}
+
+h2{
+    font-size: 14pt;
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+}
+
+h3{
+    font-size: 18pt;
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+}
+
+#container{
+
+    position: relative;
+    margin: 20px auto 20px auto;
+    width: 900px;
+    height: 600px;
+}
+
+header{
+    position: relative;
+    width: 100%;
+    background-color: lightgrey;
+}
+
+#container div{
+    position: relative;
+    top: 20px;
+}
+
+footer{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 0;
+}
+
+/*#region Startpage*/
+#start{
+    background-color:#f8f8f8;
+    height: 500px;
+}
+
+#happening, #myStartInfo, #trends{
+    /*background-color: aqua;*/
+    position: absolute;
+    width: 50%;
+    height: 500px;
+    margin: 0;
+    display: inline-block;
+}
+
+#myStartInfo, #trends{
+    right: 0;
+    height: 250px;
+}
+
+#happening{
+    left: 0;
+    height: 500px;
+}
+
+#myStartInfo, #happening{
+    top: 0;
+}
+
+#trends{
+    bottom: 0;
+}
+
+.inputTweet{ /*input*/
+    width: 100%;
+    height: 150px;
+}
+
+.tabKwetter{
+    font-size: 11pt;
+    font-family: "Calibri", Arial, Helvetica, sans-serif;
+    height: 45%;
+}
+
+.imageUser{
+    height: 45px;
+    width: 45px;
+    margin-left: 3px;
+    background-color: brown;
+}
+
+#myTweet{
+    display: inline-block;
+    width: 85%;
+    height: 70px;
+}
+
+#imagesFollowing, #imagesFollowers{
+    width: 40%;
+    display: inline-block;
+}
+/*#endregion Startpage*/
+
+/*#region Profilepage*/
+
+/*#endregion Profilepage*/
+
+/*#region Administration*/
+/*#endregion Administration*/
+
+/*#region RegisterAndLogin*/
+#logIn, #register{
+    width: 45%;
+    height: 200px;
+    background-color: cadetblue;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+#logIn{
+    margin-right: 5%;
+}
+
+.regLogLabels{
+    width: 57%;
+}
+
+table{
+    margin: 20px auto;
+}
+/*#endregion RegisterAndLogin*/

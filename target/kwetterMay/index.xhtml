@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+    <h:outputScript name="javascript/kwetterJS.js"/>
+</h:head>
+<h:body>
+    <h:form>
+        <section id="container">
+
+            <header>
+                <h:inputText id="search" value="#{tweetMgr.searchWord}"
+                             valueChangeListener="#{tweetMgr.searchWordChanged}"></h:inputText>
+
+                <!-- aanpassen naar liijst van resultaten-->
+                <h:outputText id="output" value="#{tweetMgr.searchWord}"/>
+
+                <h:commandButton value="Log in"/>
+            </header>
+            <div id="start">
+                <section id="happening">
+                    <h3>What's happening?</h3>
+                    <h:inputText id="newTweet" styleClass="inputTweet" value="#{tweetMgr.newTweet}"
+                                 valueChangeListener="#{tweetMgr.addNewTweet}"></h:inputText>
+
+                    <p:tabView styleClass="tabKwetter">
+                        <p:tab title="Timeline" >
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <h:outputText
+                                        value="The story begins as Don Vito Corleone..." />
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab title="@Mentions">
+                            <h:panelGrid columns="1" cellpadding="10">
+                                <h:outputText value="Francis Ford Coppola's legendary..." />
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </section>
+
+                <section id="myStartInfo">
+                    <h3>Your tweet's</h3>
+                    <p:graphicImage name="images/Varken.png" styleClass="imageUser"/>
+                    <div id="myTweet">
+                        <h:outputLabel id="myTweetLbl"></h:outputLabel>
+                    </div>
+
+                    <section id="imagesFollowing">
+                        <h2>Following</h2>
+                        <p:graphicImage id="fllwng1" styleClass="imageUser"/>
+                        <p:graphicImage id="fllwng2" styleClass="imageUser"/>
+                        <p:graphicImage id="fllwng3" styleClass="imageUser"/>
+                    </section>
+
+                    <section id="imagesFollowers">
+                        <h2>Followers</h2>
+                        <p:graphicImage id="fllw1" styleClass="imageUser"/>
+                        <p:graphicImage id="fllw2" styleClass="imageUser"/>
+                        <p:graphicImage id="fllw3" styleClass="imageUser"/>
+                    </section>
+
+                </section>
+                <section id="trends">
+                    <h3>Trends</h3>
+                </section>
+            </div>
+        </section>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="DefaultPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/Kwetter</jta-data-source>
+        <class>twitter_webservice.domain.Role</class>
+        <class>twitter_webservice.domain.Tweet</class>
+        <class>twitter_webservice.domain.Userr</class>
+        <properties>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"></property>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/kwetter"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="JamesBond"/>
+        </properties>
+    </persistence-unit>
+
+    <!--<persistence-unit name="DefaultPUtest" transaction-type="RESOURCE_LOCAL">-->
+        <!--<class>twitter_webservice.domain.Tweet</class>-->
+        <!--<class>twitter_webservice.domain.Userr</class>-->
+
+        <!--<exclude-unlisted-classes>true</exclude-unlisted-classes>-->
+        <!--<shared-cache-mode>NONE</shared-cache-mode>-->
+        <!--<properties>-->
+            <!--<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
+            <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://pyld.io:3306/may_jea"/>-->
+            <!--<property name="javax.persistence.jdbc.user" value="may_jea"/>-->
+            <!--<property name="javax.persistence.jdbc.password" value="Vxcn3@88"/>-->
+            <!--<property name="eclipselink.ddl-generation" value="create-tables"/>-->
+            <!--<property name="eclipselink.ddl-generation.output-mode" value="database"></property>-->
+        <!--</properties>-->
+    <!--</persistence-unit>-->
+</persistence>

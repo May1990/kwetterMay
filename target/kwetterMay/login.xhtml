@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+    <h:outputScript name="javascript/kwetterJS.js"/>
+</h:head>
+<h:body>
+    <section id="container">
+        <div id="logIn">
+            <h:form>
+                <h:outputLabel value="#{test.name}"/>
+                <h:commandButton  action="#{test.test}" />
+            </h:form>
+            <h:form method="POST" action="j_security_check">
+                <table>
+                    <tr>
+                        <td class="regLogLabels">
+                            <label>Username:</label>
+                        </td>
+                        <td>
+                            <h:inputText id="j_username" size="30" ></h:inputText>
+                            <!--<h:inputText id="username" value="#{registerLogIn.username}" ></h:inputText>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="regLogLabels">Password:</label>
+                        </td>
+                        <td>
+                            <h:inputSecret id="j_password" size="30" ></h:inputSecret>
+                            <!--<h:inputText id="password" value="#{registerLogIn.password}" ></h:inputText>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="regLogLabels"></td>
+                        <td>
+                            <h:commandButton value="Login" title="Login" type="submit"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </div>
+
+        <h:form>
+            <div id="register">
+                <table>
+                    <tr>
+                        <td class="regLogLabels">
+                            <label>Username:</label>
+                        </td>
+                        <td>
+                            <h:inputText id="regUsername" value="#{registerLogIn.regUsername}" ></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="regLogLabels">
+                            <label>Password:</label>
+                        </td>
+                        <td>
+                            <h:inputText id="regPassword" value="#{registerLogIn.regPassword}" ></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="regLogLabels">
+                            <label>Confirm Password:</label>
+                        </td>
+                        <td>
+                            <h:inputText id="regPasswordCnfrm" value="#{registerLogIn.regPasswrdCnfrm}" ></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="regLogLabels">
+                            <label>Email:</label>
+                        </td>
+                        <td>
+                            <h:inputText id="email" value="#{registerLogIn.email}" ></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="regLogLabels">
+                            <label>Confirm email:</label>
+                        </td>
+                        <td>
+                            <h:inputText id="emailCnfrm" value="#{registerLogIn.emailCnfrm}" ></h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <h:commandButton value="Register" action="index"/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </h:form>
+        <footer>
+
+        </footer>
+    </section>
+</h:body>
+</html>
