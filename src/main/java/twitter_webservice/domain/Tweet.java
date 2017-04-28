@@ -26,7 +26,7 @@ import java.util.List;
         @NamedQuery(name = "Tweet.all", query = "SELECT c FROM Tweet c"),
         @NamedQuery(name = "Tweet.tweetsByUser", query = "SELECT c FROM Tweet c WHERE c.owner = :user")
 })
-public class Tweet implements Serializable {
+public class Tweet implements Serializable, Comparable<Tweet> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -97,6 +97,10 @@ public class Tweet implements Serializable {
 
     public void addLike(Userr user){
         likes.add(user);
+    }
+
+    public int compareTo(Tweet o) {
+        return getDate().compareTo(o.getDate());
     }
 
     //    public String getUserName() {

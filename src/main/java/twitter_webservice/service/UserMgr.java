@@ -71,7 +71,8 @@ public class UserMgr {
                 biografy,
                 locationX,
                 locationY,
-                website
+                website,
+                "http://www.tutorialspoint.com/images/jsf-mini-logo.png"
         );
 
         return userDao_impl.create(user);

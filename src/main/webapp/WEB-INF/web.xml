@@ -12,7 +12,7 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   </context-param>
 
   <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
+    <welcome-file>login.xhtml</welcome-file><!-- index.xhtml-->
   </welcome-file-list>
 
   <servlet>
@@ -39,6 +39,17 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
 
+  <!--<context-param>-->
+    <!--<param-name>javax.faces.CONFIG_FILES</param-name>-->
+    <!--<param-value>-->
+      <!--/WEB-INF/faces-config.xml-->
+    <!--</param-value> &lt;!&ndash;path/to/&ndash;&gt;-->
+  <!--</context-param>-->
+
+  <!--<context-param>-->
+    <!--<param-name>primefaces.THEME</param-name>-->
+    <!--<param-value>bootstrap</param-value>-->
+  <!--</context-param>-->
   <!--<login-config>-->
     <!--<auth-method>BASIC</auth-method>-->
     <!--<realm-name>kwetter_realm_2</realm-name>-->
@@ -50,10 +61,10 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   <!--<role-name>moderator_role</role-name>-->
   <!--</security-role>-->
 
-  <security-role>
-    <description>regular</description>
-    <role-name>regular_role</role-name>
-  </security-role>
+  <!--<security-role>-->
+    <!--<description>regular</description>-->
+    <!--<role-name>regular_role</role-name>-->
+  <!--</security-role>-->
 
   <!--<security-constraint>-->
     <!--<web-resource-collection>-->
@@ -66,9 +77,9 @@ http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   <!--</security-constraint>-->
   <!--<login-config>-->
     <!--<auth-method>FORM</auth-method>-->
-    <!--<realm-name>kwetter_realm_2</realm-name> &lt;!&ndash;jdbcRealm&ndash;&gt;-->
+    <!--<realm-name>kwetter_realm_2</realm-name>-->
     <!--<form-login-config>-->
-      <!--<form-login-page>login.xhtml</form-login-page>-->
+      <!--<form-login-page>/login.xhtml</form-login-page>-->
       <!--<form-error-page>/login_error.xhtml</form-error-page>-->
     <!--</form-login-config>-->
   <!--</login-config>-->

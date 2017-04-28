@@ -29,7 +29,7 @@ h3{
     position: relative;
     margin: 20px auto 20px auto;
     width: 900px;
-    height: 600px;
+    height: 850px;
 }
 
 header{
@@ -53,14 +53,13 @@ footer{
 /*#region Startpage*/
 #start{
     background-color:#f8f8f8;
-    height: 500px;
+    height: 750px;
 }
 
 #happening, #myStartInfo, #trends{
     /*background-color: aqua;*/
     position: absolute;
     width: 50%;
-    height: 500px;
     margin: 0;
     display: inline-block;
 }
@@ -72,7 +71,7 @@ footer{
 
 #happening{
     left: 0;
-    height: 500px;
+    height: 750px;
 }
 
 #myStartInfo, #happening{
@@ -91,7 +90,7 @@ footer{
 .tabKwetter{
     font-size: 11pt;
     font-family: "Calibri", Arial, Helvetica, sans-serif;
-    height: 45%;
+    height: 60%;
 }
 
 .imageUser{
@@ -138,7 +137,4 @@ footer{
     width: 57%;
 }
 
-table{
-    margin: 20px auto;
-}
 /*#endregion RegisterAndLogin*/

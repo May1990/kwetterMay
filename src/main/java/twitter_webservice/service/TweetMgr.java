@@ -85,6 +85,7 @@ public class TweetMgr {
     UsserDAO userDao_impl;
 
     public TweetMgr() {
+
     }
 
     public Tweet createTweet(String content, String username) {
@@ -102,6 +103,11 @@ public class TweetMgr {
         return tweetDao_impl.findByUser(user);
     }
 
+    public List<Tweet> getTweetsWithFollowing(String userName){
+        Userr user = userDao_impl.findByUserName(userName);
+        return tweetDao_impl.findByUserFollow(user);
+    }
+
     public void setTweetDao_impl(TweetDAO tweetDao_impl){
         this.tweetDao_impl = tweetDao_impl;
     }
@@ -109,6 +115,4 @@ public class TweetMgr {
     public void setUserDao_impl(UserrDAO_impl userDao_impl) {
         this.userDao_impl = userDao_impl;
     }
-
-
 }

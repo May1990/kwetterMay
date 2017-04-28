@@ -183,7 +183,8 @@ public class TestData {
                 "Hij speelde een hoofdrol in de Nederlandse televisieserie Floris (1969) van Paul Verhoeven.",
                 "5.8809216,17",
                 "51.0847923",
-                "http://www.josbergman.com"
+                "http://www.josbergman.com",
+                "http://i290.photobucket.com/albums/ll252/Aleph99/jose-saramago.jpg"
         );
 
         userTwo = new Userr(
@@ -194,7 +195,8 @@ public class TestData {
                 "Rutger Oelsen Hauer (Breukelen, 23 januari 1944) is een Nederlands acteur ",
                 "5.8809216,17",
                 "51.0847923",
-                "http://www.florisvanrosemondt.com"
+                "http://www.florisvanrosemondt.com",
+                "http://www.50plusser.nl/forum/userpix/118916_266pxFloris_1.png"
         );
         userTwo.addOwnTweet(tweetSix);
         userTwo.addOwnTweet(tweetSeven);
@@ -208,7 +210,8 @@ public class TestData {
                 "Rutger Oelsen Hauer (Breukelen, 23 januari 1944) is een Nederlands acteur ",
                 "5.8809216,17",
                 "51.0847923",
-                "http://www.rutgerhauer.com"
+                "http://www.rutgerhauer.com",
+                "http://www.screendaily.com/pictures/636xAny/9/6/7/1244967_rutger.png"
         );
         userThree.addOwnTweet(tweetOne);
         userThree.addOwnTweet(tweetTwo);
@@ -221,7 +224,8 @@ public class TestData {
                 "Hij speelde een hoofdrol in de Nederlandse televisieserie Floris (1969) van Paul Verhoeven.",
                 "5.8809216,17",
                 "51.0847923",
-                "http://www.sindala.com"
+                "http://www.sindala.com",
+                "http://nfdc.nl/Paginas_F/floris_(1969)_bestanden/Floris_(1969)_DVD_1-3_bestanden/image011.jpg"
         );
         userFour.addOwnTweet(tweetThree);
         userFour.addOwnTweet(tweetFour);

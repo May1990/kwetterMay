@@ -43,6 +43,7 @@ public class Userr implements Serializable {
     private String locationX;
     private String locationY;
     private String website;
+    private String pictureUrl;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
     @JoinTable(name="FOLLOWERS")
@@ -63,7 +64,7 @@ public class Userr implements Serializable {
     public Userr() {
     }
 
-    public Userr(String password, String email, String name, String userName, String biografy, String locationX, String locationY, String website) {
+    public Userr(String password, String email, String name, String userName, String biografy, String locationX, String locationY, String website, String pictureUrl) {
         this.password = password;
         this.roles = new ArrayList<Role>();
         this.email = email;
@@ -77,11 +78,20 @@ public class Userr implements Serializable {
         this.following = new ArrayList<Userr>();
         this.likedTweets = new ArrayList<Tweet>();
         this.ownTweets = new ArrayList<Tweet>();
+        this.pictureUrl = pictureUrl;
     }
 
     public Userr(String userName, List<Tweet> likedTweets) {
         this.userName = userName;
         this.likedTweets = likedTweets;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 
     public String getPassword() {
@@ -99,7 +109,6 @@ public class Userr implements Serializable {
     public List<Role> getRoles() {
         return roles;
     }
-
 
     public String getEmail() {
         return email;

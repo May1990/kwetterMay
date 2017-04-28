@@ -47,11 +47,6 @@ public class UserrDAO_impl implements UsserDAO {
         if(users.size() > 0){
             user = users.get(0);
         }
-//        List<Tweet> tweets = user.getOwnTweets();
-//        for (Tweet tweet : tweets) {
-//            tweet.setOwner(null);
-//        }
-
         return user;
     }
 

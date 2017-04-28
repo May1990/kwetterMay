@@ -8,6 +8,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,6 +44,16 @@ public class TweetDAO_impl implements TweetDAO {
     public List<Tweet> findByUser(Userr user) {
         List<Tweet> tweets;
         tweets = em.createNamedQuery("Tweet.tweetsByUser").setParameter("user", user).getResultList();
+        return tweets;
+    }
+
+    public List<Tweet> findByUserFollow(Userr user) {
+        List<Tweet> tweets = findByUser(user);
+        for (Userr following: user.getFollowing()){
+            tweets.addAll(findByUser(following));
+        }
+
+        Collections.sort(tweets);
         return tweets;
     }
 

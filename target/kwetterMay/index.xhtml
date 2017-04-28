@@ -2,72 +2,87 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <h:outputStylesheet name="css/style.css"/>
     <h:outputScript name="javascript/kwetterJS.js"/>
 </h:head>
 <h:body>
-    <h:form>
-        <section id="container">
+    <section id="container">
+        <header>
+            <p>In gelogd als: <br/>
+            <b>Username: </b><h:outputText value="#{registerLogIn.logInUser.userName}"/>
+                 <b>Email: </b><h:outputText value="#{registerLogIn.logInUser.email}"/></p>
+            <h:form>
+                <h:inputText id="searchTxt" value="#{tweetMgr.searchWord}" onkeypress="if (event.keyCode == 13) {event.target.blur();event.stopPropagation();return false;} else {return true;};" >
+                    <f:ajax event="change" execute="searchTxt" render=":tableForm:tbvwTweets" listener="#{tweetMgr.searchWordChanged}"/>
+                </h:inputText>
+            </h:form>
+        </header>
+        <div id="start">
+            <section id="happening">
+                <h3>What's happening?</h3>
+                <h:form>
+                    <h:inputTextarea id="newTweet" a:maxlength="140" styleClass="inputTweet" value="#{tweetMgr.newTweetContent}" onkeypress="if (event.keyCode == 13) {event.target.blur();event.stopPropagation();return false;} else {return true;};">
+                        <f:ajax event="change" execute="newTweet" listener="#{tweetMgr.addNewTweet}"/>
+                    </h:inputTextarea>
+                </h:form>
 
-            <header>
-                <h:inputText id="search" value="#{tweetMgr.searchWord}"
-                             valueChangeListener="#{tweetMgr.searchWordChanged}"></h:inputText>
-
-                <!-- aanpassen naar liijst van resultaten-->
-                <h:outputText id="output" value="#{tweetMgr.searchWord}"/>
-
-                <h:commandButton value="Log in"/>
-            </header>
-            <div id="start">
-                <section id="happening">
-                    <h3>What's happening?</h3>
-                    <h:inputText id="newTweet" styleClass="inputTweet" value="#{tweetMgr.newTweet}"
-                                 valueChangeListener="#{tweetMgr.addNewTweet}"></h:inputText>
-
-                    <p:tabView styleClass="tabKwetter">
-                        <p:tab title="Timeline" >
-                            <h:panelGrid columns="1" cellpadding="10">
-                                <h:outputText
-                                        value="The story begins as Don Vito Corleone..." />
+                <h:form id="tableForm">
+                    <p:tabView styleClass="tabKwetter" id="tbvwTweets">
+                        <p:tab title="Timeline" id="tabTime">
+                            <h:panelGrid columns="1" cellpadding="0" id="pnlGrdTweet">
+                                <p:dataTable id="tweetTable" value="#{tweetMgr.tweets}"  var="tweet" reflow="true" rows="3" paginator="true">
+                                    <p:column>
+                                        <b>#{tweet.date}</b>
+                                        #{tweet.content}
+                                    </p:column>
+                                </p:dataTable>
                             </h:panelGrid>
                         </p:tab>
                         <p:tab title="@Mentions">
-                            <h:panelGrid columns="1" cellpadding="10">
+                            <h:panelGrid columns="1" cellpadding="0">
                                 <h:outputText value="Francis Ford Coppola's legendary..." />
                             </h:panelGrid>
                         </p:tab>
                     </p:tabView>
+                </h:form>
+            </section>
+
+            <section id="myStartInfo">
+                <h3>Your tweet's</h3>
+                <h:graphicImage value="#{registerLogIn.logInUser.pictureUrl}" styleClass="imageUser"/>
+                <div id="myTweet">
+                    <h:outputLabel value=""></h:outputLabel>
+                    <h:outputLabel ></h:outputLabel>
+                </div>
+
+                <section id="imagesFollowing">
+                    <h2>Following</h2>
+                    <ui:repeat value="#{registerLogIn.logInUser.following}" var="folow" ><!--size="3"-->
+                        <h:graphicImage styleClass="imageUser" value="#{folow.pictureUrl}"/>
+                    </ui:repeat>
                 </section>
 
-                <section id="myStartInfo">
-                    <h3>Your tweet's</h3>
-                    <p:graphicImage name="images/Varken.png" styleClass="imageUser"/>
-                    <div id="myTweet">
-                        <h:outputLabel id="myTweetLbl"></h:outputLabel>
-                    </div>
-
-                    <section id="imagesFollowing">
-                        <h2>Following</h2>
-                        <p:graphicImage id="fllwng1" styleClass="imageUser"/>
-                        <p:graphicImage id="fllwng2" styleClass="imageUser"/>
-                        <p:graphicImage id="fllwng3" styleClass="imageUser"/>
-                    </section>
-
-                    <section id="imagesFollowers">
-                        <h2>Followers</h2>
-                        <p:graphicImage id="fllw1" styleClass="imageUser"/>
-                        <p:graphicImage id="fllw2" styleClass="imageUser"/>
-                        <p:graphicImage id="fllw3" styleClass="imageUser"/>
-                    </section>
-
+                <section id="imagesFollowers">
+                    <h2>Followers</h2>
+                    <ui:repeat value="#{registerLogIn.logInUser.followers}" var="folow" ><!--size="3"-->
+                        <h:graphicImage styleClass="imageUser" value="#{folow.pictureUrl}"/>
+                    </ui:repeat>
                 </section>
-                <section id="trends">
-                    <h3>Trends</h3>
-                </section>
-            </div>
-        </section>
-    </h:form>
+            </section>
+            <section id="trends">
+                <h3>Trends</h3><br/>
+                <p>
+                    #loveIsInTheAir<br/>
+                    #bosselbol<br/>
+                    #oudProgramma<br/>
+                    #m44twerk<br/>
+                    #broodjeAap<br/>
+                </p>
+            </section>
+        </div>
+    </section>
 </h:body>
 </html>
