@@ -26,6 +26,9 @@ public class UserMgrBean implements Serializable {
     private List<Userr> followers;
     private List<Userr> users;
 
+    private int countFollowing;
+    private int countFollower;
+
     //region getterSetter
     public UserMgr getUserMgr() {
         return userMgr;
@@ -66,6 +69,23 @@ public class UserMgrBean implements Serializable {
     public void setUsers(List<Userr> users) {
         this.users = users;
     }
+
+    public int getCountFollowing() {
+        return countFollowing;
+    }
+
+    public void setCountFollowing(int countFollowing) {
+        this.countFollowing = countFollowing;
+    }
+
+    public int getCountFollower() {
+        return countFollower;
+    }
+
+    public void setCountFollower(int countFollower) {
+        this.countFollower = countFollower;
+    }
+
     //endregion
 
     public String allUsers(){
@@ -111,5 +131,10 @@ public class UserMgrBean implements Serializable {
         }
 
         return message;
+    }
+
+    public void countFollow(){
+        countFollowing = userMgr.getCountFollowing(selectedUser.getId());
+        countFollower = userMgr.getCountFollower(selectedUser.getId());
     }
 }

@@ -4,8 +4,11 @@ import twitter_webservice.domain.Userr;
 import twitter_webservice.service.UserMgr;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -27,11 +30,13 @@ public class RegisterLogInBean implements Serializable {
     private String website;
     private String name;
 
-    //@ManagedProperty(value="#{logInUser}")
     private Userr logInUser;
 
     @Inject
     private UserMgr userMgr;
+
+    private String maxFollowing;
+    private String maxFollower;
 
     //region getterSetter
     public Userr getLogInUser() {
@@ -113,6 +118,23 @@ public class RegisterLogInBean implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getMaxFollowing() {
+        return maxFollowing;
+    }
+
+    public void setMaxFollowing(String maxFollowing) {
+        this.maxFollowing = maxFollowing;
+    }
+
+    public String getMaxFollower() {
+        return maxFollower;
+    }
+
+    public void setMaxFollower(String maxFollower) {
+        this.maxFollower = maxFollower;
+    }
+
     //endregion
 
     public String registerUser(){
@@ -131,6 +153,7 @@ public class RegisterLogInBean implements Serializable {
         } else {
             nextPage = "index";
             logInUser = user;
+            refreshSizeFollow();
         }
 
         return nextPage;
@@ -150,5 +173,26 @@ public class RegisterLogInBean implements Serializable {
         }
 
         return nextPage;
+    }
+
+    public void refreshSizeFollow(){
+        if(logInUser != null){
+            if(logInUser.getFollowing().size() > 3){
+                maxFollowing = Integer.toString(3);
+            }else{
+                maxFollowing = Integer.toString(logInUser.getFollowing().size()-1);
+            }
+
+            if(logInUser.getFollowers().size() > 3){
+                maxFollower = Integer.toString(3);
+            }else{
+                maxFollower = Integer.toString(logInUser.getFollowing().size()-1);
+            }
+        }
+    }
+
+    public void redirect() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("login.xhtml");
     }
 }

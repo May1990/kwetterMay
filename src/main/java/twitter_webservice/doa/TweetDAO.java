@@ -19,4 +19,8 @@ public interface TweetDAO {
     List<Tweet> findByUser(Userr user);
     void removeTweet(Tweet tweet);
     List<Tweet> findByUserFollow(Userr user);
+    Tweet findLastTweetByUser(Userr user);
+    int tweetCountByUserName(Userr userName);
+    List<Tweet> tweetsOnlyFollowing(Long id);
+    List<Tweet> tweetsOnlyFollower(Long id);
 }

@@ -24,7 +24,9 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Tweet.all", query = "SELECT c FROM Tweet c"),
-        @NamedQuery(name = "Tweet.tweetsByUser", query = "SELECT c FROM Tweet c WHERE c.owner = :user")
+        @NamedQuery(name = "Tweet.tweetsByUser", query = "SELECT c FROM Tweet c WHERE c.owner = :user"),
+        @NamedQuery(name = "Tweet.tweetsCountByUser", query = "SELECT count(c.id) FROM Tweet c WHERE c.owner = :user"),
+        @NamedQuery(name = "Tweet.tweetsById", query = "SELECT c FROM Tweet c WHERE c.owner.id = :userId")
 })
 public class Tweet implements Serializable, Comparable<Tweet> {
     @Id
@@ -43,6 +45,9 @@ public class Tweet implements Serializable, Comparable<Tweet> {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "owner_id", referencedColumnName = "ID")
     private Userr owner;
+
+    @Transient
+    private String timeAgo;
 
     public Tweet() {
 
@@ -95,8 +100,25 @@ public class Tweet implements Serializable, Comparable<Tweet> {
         this.owner = owner;
     }
 
+    public String getTimeAgo() {
+        return timeAgo;
+    }
+
+    public void setTimeAgo(String timeAgo) {
+        this.timeAgo = timeAgo;
+    }
+
     public void addLike(Userr user){
         likes.add(user);
+    }
+
+    public String refreshTimeAgo(){
+        long diff = new Date().getTime() - date.getTime();
+        long seconds = diff / 1000 % 60;
+        long minutes = diff / (60 * 1000) % 60;
+
+        timeAgo = minutes + " minuten en " + seconds + " seconden geleden";
+        return timeAgo;
     }
 
     public int compareTo(Tweet o) {

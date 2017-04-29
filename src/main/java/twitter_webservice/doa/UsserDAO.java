@@ -3,7 +3,6 @@ package twitter_webservice.doa;
 import twitter_webservice.domain.Userr;
 
 import javax.ejb.Local;
-import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -18,4 +17,6 @@ public interface UsserDAO {
     void remove(Userr user);
     List<Userr> findFollowersByUserName(String userName);
     List<Userr> findFollowingByUserName(String userName);
+    int findCountFollowingByUsername(Long id);
+    int findCountFollowersByUsername(Long id);
 }

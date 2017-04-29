@@ -103,9 +103,27 @@ public class TweetMgr {
         return tweetDao_impl.findByUser(user);
     }
 
+    public Tweet getLastTweetByUserName(String userName){
+        Userr user = userDao_impl.findByUserName(userName);
+        return tweetDao_impl.findLastTweetByUser(user);
+    }
+
     public List<Tweet> getTweetsWithFollowing(String userName){
         Userr user = userDao_impl.findByUserName(userName);
         return tweetDao_impl.findByUserFollow(user);
+    }
+
+    public int getTweetCountByUserName(String userName) {
+        Userr user = userDao_impl.findByUserName(userName);
+        return tweetDao_impl.tweetCountByUserName(user);
+    }
+
+    public List<Tweet> getTweetsOnlyFollowing(Long id) {
+        return tweetDao_impl.tweetsOnlyFollowing(id);
+    }
+
+    public List<Tweet> getTweetsOnlyFollower(Long id) {
+        return tweetDao_impl.tweetsOnlyFollower(id);
     }
 
     public void setTweetDao_impl(TweetDAO tweetDao_impl){

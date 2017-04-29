@@ -9,63 +9,57 @@
 </h:head>
 <h:body>
     <section id="container">
-        <div id="logIn">
-            <h:form>
-                <h:outputLabel value="#{test.name}"/>
-                <h:commandButton  action="#{test.test}" />
-            </h:form>
-            <h:form method="POST" action="j_security_check">
-                <!--<p:panelGrid columns="2">-->
-                    <!--Username:-->
-                    <!--<h:inputText id="j_username" size="30" ></h:inputText>-->
+        <div id="registerlogin">
+            <section id="logIn">
+                <h:form method="POST" action="j_security_check">
+                    <!--<p:panelGrid columns="2">-->
+                        <!--Username:-->
+                        <!--<h:inputText id="j_username" size="30" ></h:inputText>-->
 
-                    <!--Password:-->
-                    <!--<h:inputSecret id="j_password" size="30" ></h:inputSecret>-->
-                <!--</p:panelGrid>-->
-                <!--<h:commandButton value="Login" title="Login" type="submit"/>-->
+                        <!--Password:-->
+                        <!--<h:inputSecret id="j_password" size="30" ></h:inputSecret>-->
+                    <!--</p:panelGrid>-->
+                    <!--<h:commandButton value="Login" title="Login" type="submit"/>-->
 
-                <p:panelGrid columns="2">
-                    Username:
-                    <h:inputText value="#{registerLogIn.username}" size="30" ></h:inputText>
+                    <p:panelGrid columns="2" styleClass="panelTable">
+                        Username:
+                        <h:inputText value="#{registerLogIn.username}" size="30" ></h:inputText>
 
-                    Password:
-                    <h:inputSecret value="#{registerLogIn.password}" size="30" ></h:inputSecret>
-                </p:panelGrid>
-                <h:commandButton value="log in" action="#{registerLogIn.logInUserByUserName}" />
-            </h:form>
+                        Password:
+                        <h:inputSecret value="#{registerLogIn.password}" size="30" ></h:inputSecret>
+                    </p:panelGrid>
+                    <h:commandButton value="log in" action="#{registerLogIn.logInUserByUserName}" />
+                </h:form>
+            </section>
+
+            <section id="register">
+                <h:form>
+                    <p:panelGrid columns="2" styleClass="panelTable">
+                        Name:
+                        <h:inputText id="name" value="#{registerLogIn.name}" ></h:inputText>
+
+                        Username:
+                        <h:inputText id="regUsername" value="#{registerLogIn.regUsername}" ></h:inputText>
+
+                        Password:
+                        <h:inputText id="regPassword" value="#{registerLogIn.regPassword}" ></h:inputText>
+
+                        Confirm Password:
+                        <h:inputText id="regPasswordCnfrm" value="#{registerLogIn.regPasswrdCnfrm}" ></h:inputText>
+
+                        Email:
+                        <h:inputText id="email" value="#{registerLogIn.email}" ></h:inputText>
+
+                        Confirm email:
+                        <h:inputText id="emailCnfrm" value="#{registerLogIn.emailCnfrm}" ></h:inputText>
+
+                        Website:
+                        <h:inputText id="website" value="#{registerLogIn.website}" ></h:inputText>
+                    </p:panelGrid>
+                    <h:commandButton value="Register" action="#{registerLogIn.registerUser}"/>
+                </h:form>
+            </section>
         </div>
-
-        <div id="register">
-            <h:form>
-                <p:panelGrid columns="2">
-                    Name:
-                    <h:inputText id="name" value="#{registerLogIn.name}" ></h:inputText>
-
-                    Username:
-                    <h:inputText id="regUsername" value="#{registerLogIn.regUsername}" ></h:inputText>
-
-                    Password:
-                    <h:inputText id="regPassword" value="#{registerLogIn.regPassword}" ></h:inputText>
-
-                    Confirm Password:
-                    <h:inputText id="regPasswordCnfrm" value="#{registerLogIn.regPasswrdCnfrm}" ></h:inputText>
-
-                    Email:
-                    <h:inputText id="email" value="#{registerLogIn.email}" ></h:inputText>
-
-                    Confirm email:
-                    <h:inputText id="emailCnfrm" value="#{registerLogIn.emailCnfrm}" ></h:inputText>
-
-                    Website:
-                    <h:inputText id="website" value="#{registerLogIn.website}" ></h:inputText>
-                </p:panelGrid>
-                <h:commandButton value="Register" action="#{registerLogIn.registerUser}"/>
-            </h:form>
-        </div>
-
-        <footer>
-
-        </footer>
     </section>
 </h:body>
 </html>

@@ -81,6 +81,16 @@ public class UserrDAO_impl implements UsserDAO {
         return users;
     }
 
+    public int findCountFollowingByUsername(Long id) {
+        Object count = em.createNativeQuery("SELECT count(*) FROM FOLLOWING WHERE Userr_ID = " + id).getSingleResult();
+        return Integer.parseInt(count.toString());
+    }
+
+    public int findCountFollowersByUsername(Long id) {
+        Object count = em.createNativeQuery("SELECT count(*) FROM FOLLOWERS WHERE Userr_ID = " + id).getSingleResult();
+        return Integer.parseInt(count.toString());
+    }
+
     public void setEntityManager(EntityManager em) {
         this.em = em;
     }

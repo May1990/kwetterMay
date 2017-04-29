@@ -85,4 +85,12 @@ public class UserMgr {
     public void setUserDao_impl(UsserDAO userDao_impl){
         this.userDao_impl = userDao_impl;
     }
+
+    public int getCountFollowing(Long id) {
+        return userDao_impl.findCountFollowingByUsername(id);
+    }
+
+    public int getCountFollower(Long id) {
+        return userDao_impl.findCountFollowersByUsername(id);
+    }
 }
