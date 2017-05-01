@@ -19,4 +19,5 @@ public interface UsserDAO {
     List<Userr> findFollowingByUserName(String userName);
     int findCountFollowingByUsername(Long id);
     int findCountFollowersByUsername(Long id);
+    boolean doesUsernameExist(String tempUserName);
 }

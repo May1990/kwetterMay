@@ -7,6 +7,7 @@
       xmlns:cc="http://xmlns.jcp.org/jsf/composite">
 <h:head>
     <h:outputStylesheet name="css/style.css"/>
+    <h:outputScript name="javascript/kwetterJS.js"/>
 </h:head>
 <h:body>
     <section id="container">
@@ -41,44 +42,71 @@
             <section id="profileDetails">
                 <h3>Details</h3><br/>
                 <h:form id="detailForm">
-                    <p:panelGrid id="detail" columns="2" styleClass="panelTable" style="display: block">
+                    <p:panelGrid id="detail" columns="2" styleClass="panelTable" > <!--style="display: none"-->
                         Name:
-                        <h:outputText id="name" value="#{userMgr.selectedUser.name}" ></h:outputText>
+                        <h:outputText id="name" value="#{userMgr.name}" ></h:outputText>
 
                         Username:
-                        <h:outputText id="username" value="#{userMgr.selectedUser.userName}" ></h:outputText>
+                        <h:outputText id="username" value="#{userMgr.tempUserName}" ></h:outputText>
 
                         Web:
-                        <h:outputText id="web" value="#{userMgr.selectedUser.website}" ></h:outputText>
+                        <h:outputText id="web" value="#{userMgr.web}" ></h:outputText>
 
                         Bio:
-                        <h:outputText id="bio" value="#{userMgr.selectedUser.biografy}" ></h:outputText>
+                        <h:outputText id="bio" value="#{userMgr.bio}" ></h:outputText>
                     </p:panelGrid>
-                    <p:panelGrid id="detailAdjust" columns="2" styleClass="panelTable" style="display: none">
+                    <p:panelGrid id="detailAdjust" columns="2" styleClass="panelTable" >
                         Name:
-                        <h:inputText id="nameAdjust" value="#{userMgr.selectedUser.name}" ></h:inputText>
-
-                        Username:
-                        <h:inputText id="usernameAdjust" value="#{userMgr.selectedUser.userName}" ></h:inputText>
+                        <h:inputText id="nameAdjust" value="#{userMgr.name}">
+                            <f:ajax execute="nameAdjust" render=":detailForm:nameAdjust :detailForm:name" />
+                        </h:inputText>
 
                         Web:
-                        <h:inputText id="webAdjust" value="#{userMgr.selectedUser.website}" ></h:inputText>
+                        <h:inputText id="webAdjust" value="#{userMgr.web}">
+                            <f:ajax execute="webAdjust" render=":detailForm:webAdjust :detailForm:web" />
+                        </h:inputText>
 
                         Bio:
-                        <h:inputTextarea id="bioAdjust" value="#{userMgr.selectedUser.biografy}" style="height: 150px; width: 217.6px;"></h:inputTextarea>
+                        <h:inputTextarea id="bioAdjust" value="#{userMgr.bio}" style="height: 150px; width: 217.6px;">
+                            <f:ajax execute="bioAdjust" render=":detailForm:bioAdjust :detailForm:bio" />
+                        </h:inputTextarea>
+
+                        Upload foto:
+                        <h:inputTextarea id="pictureAdjust" value="#{userMgr.bio}" style="height: 150px; width: 217.6px;">
+                            <f:ajax execute="pictureAdjust" render=":detailForm:bioAdjust" />
+                        </h:inputTextarea>
+                    </p:panelGrid>
+
+                    <p:panelGrid id="usernameAdjustPnl" columns="2" styleClass="panelTable">
+                        Username:
+                        <h:inputText id="usernameAdjust" value="#{userMgr.tempUserName}">
+                            <f:ajax execute="usernameAdjust" listener="#{userMgr.doesUsernameExist()}"/>
+                            <f:ajax execute="usernameAdjust" render=":detailForm:userNameExist :detailForm:username" onevent="userNameExist"/>
+                        </h:inputText>
+
+                        <h:outputText id="userNameExist" style="color: brown; display: none" value="#{userMgr.usernameExist}"/>
                     </p:panelGrid>
                 </h:form>
+                <h:form>
+                    <ui:fragment rendered="#{registerLogIn.logInUser.id eq userMgr.selectedUser.id}">
+                        <p:remoteCommand oncomplete="back()" autoRun="true"/>
+                    </ui:fragment>
+                </h:form>
                 <h:panelGrid id="adjustDetails">
-                    <c:if test="#{registerLogIn.logInUser.id eq userMgr.selectedUser.id}">
-                        <h:commandButton id="btnWantAdjust" value="Bewerken" onclick="(function(){ document.getElementById('detailForm:detail').style.display = 'none';
-                                                                                                    document.getElementById('detailForm:detailAdjust').style.display = 'block';
-                                                                                                    document.getElementById('btnWantAdjust').style.display = 'none';
-                                                                                                    document.getElementById('btnAdjust').style.display = 'block';})();"/>
-                        <h:commandButton id="btnAdjust" value="Bewerken" style="display: none" onclick="(function(){ document.getElementById('detailForm:detailAdjust').style.display = 'none';
-                        document.getElementById('detailForm:detail').style.display = 'block';
-                        document.getElementById('btnWantAdjust').style.display = 'block';
-                        document.getElementById('btnAdjust').style.display = 'none';})()"/>
-                    </c:if>
+                    <ui:fragment rendered="#{registerLogIn.logInUser.id eq userMgr.selectedUser.id}">
+
+                        <h:commandButton id="btnAdjust" value="Bewerken" update=":detailForm:detailAdjust"  onclick="next()"> <!--onclick="next()"-->
+                            <f:ajax execute="btnAdjust" listener="#{userMgr.adjustUser()}"/>
+                            <!--<f:setPropertyActionListener value="#{true}" target="#{userMgr.bio}" />-->
+                            <!--<c:if test="">-->
+                            <!--<f:ajax execute="btnAdjust" update=":detailForm:detail"/>-->
+                            <!--</c:if>-->
+                            <!--<f:ajax execute="btnAdjust" onevent="next()"/>-->
+                        </h:commandButton>
+                        <h:commandButton id="btnCancel" value="Cancel" style="display: none;" onclick="back()">
+                            <f:ajax execute="btnCancel" listener="#{userMgr.refreshAtrUser()}" />
+                        </h:commandButton>
+                    </ui:fragment>
                 </h:panelGrid>
             </section>
             <section id="followInfo">

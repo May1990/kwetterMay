@@ -29,7 +29,12 @@ public class UserrDAO_impl implements UsserDAO {
     }
 
     public void edit(Userr user) {
-        em.merge(user);
+        try {
+            em.merge(user);
+        }catch (Exception e){
+
+        }
+
     }
 
     public List<Userr> findAll() {
@@ -71,9 +76,6 @@ public class UserrDAO_impl implements UsserDAO {
         Userr user;
         try{
             user = findByUserName(userName);
-//            users = em.createNamedQuery("User.userByUserName").setParameter("userName", userName).getResultList();
-//            Userr user;
-//            user = users.get(0);
             users = user.getFollowing();
         } catch (Error er) {
             users = new ArrayList<Userr>();
@@ -89,6 +91,16 @@ public class UserrDAO_impl implements UsserDAO {
     public int findCountFollowersByUsername(Long id) {
         Object count = em.createNativeQuery("SELECT count(*) FROM FOLLOWERS WHERE Userr_ID = " + id).getSingleResult();
         return Integer.parseInt(count.toString());
+    }
+
+    public boolean doesUsernameExist(String tempUserName) {
+        Object count = em.createNamedQuery("User.existUserName").setParameter("userName", tempUserName).getSingleResult();
+        boolean exist = false;
+        if(Integer.parseInt(count.toString()) > 0){
+            exist = true;
+        }
+
+        return exist;
     }
 
     public void setEntityManager(EntityManager em) {

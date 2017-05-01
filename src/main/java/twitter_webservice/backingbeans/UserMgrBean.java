@@ -29,6 +29,12 @@ public class UserMgrBean implements Serializable {
     private int countFollowing;
     private int countFollower;
 
+    private String usernameExist;
+    private String tempUserName;
+    private String name;
+    private String web;
+    private String bio;
+
     //region getterSetter
     public UserMgr getUserMgr() {
         return userMgr;
@@ -86,6 +92,46 @@ public class UserMgrBean implements Serializable {
         this.countFollower = countFollower;
     }
 
+    public String getUsernameExist() {
+        return usernameExist;
+    }
+
+    public void setUsernameExist(String usernameExist) {
+        this.usernameExist = usernameExist;
+    }
+
+    public String getTempUserName() {
+        return tempUserName;
+    }
+
+    public void setTempUserName(String tempUserName) {
+        this.tempUserName = tempUserName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
     //endregion
 
     public String allUsers(){
@@ -136,5 +182,29 @@ public class UserMgrBean implements Serializable {
     public void countFollow(){
         countFollowing = userMgr.getCountFollowing(selectedUser.getId());
         countFollower = userMgr.getCountFollower(selectedUser.getId());
+    }
+
+    public void doesUsernameExist(){
+        if(userMgr.doesUsernameExist(tempUserName)){
+            usernameExist = "Username bestaat al!";
+        }else{
+            usernameExist = "";
+        }
+    }
+
+    public void refreshAtrUser(){
+        tempUserName = selectedUser.getUserName();
+        name = selectedUser.getName();
+        web = selectedUser.getWebsite();
+        bio = selectedUser.getBiografy();
+    }
+
+    public void adjustUser(){
+        selectedUser.setBiografy(bio);
+        selectedUser.setWebsite(web);
+        selectedUser.setName(name);
+        selectedUser.setUserName(tempUserName);
+
+        userMgr.adjustUser(selectedUser);
     }
 }

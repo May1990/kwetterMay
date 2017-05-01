@@ -22,7 +22,8 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "User.all", query = "SELECT c FROM Userr c"),
-        @NamedQuery(name = "User.userByUserName", query = "SELECT c FROM Userr c WHERE c.userName = :userName")
+        @NamedQuery(name = "User.userByUserName", query = "SELECT c FROM Userr c WHERE c.userName = :userName"),
+        @NamedQuery(name = "User.existUserName", query = "SELECT count(c.userName) FROM Userr c WHERE c.userName = :userName")
 })
 public class Userr implements Serializable {
 

@@ -21,9 +21,9 @@ public class Role {
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name="USER_ROLE",
             joinColumns = @JoinColumn(name = "roleName",
-                    referencedColumnName = "ROLENAME"),
-            inverseJoinColumns = @JoinColumn(name = "userName",
-                    referencedColumnName = "USERNAME"))
+                    referencedColumnName = "ROLENAME", updatable = false),
+            inverseJoinColumns = @JoinColumn(name = "userr_ID",
+                    referencedColumnName = "ID", updatable = false))
     private List<Userr> users;
 
     public Role() {

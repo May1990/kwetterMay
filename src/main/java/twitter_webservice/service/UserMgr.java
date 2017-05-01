@@ -93,4 +93,12 @@ public class UserMgr {
     public int getCountFollower(Long id) {
         return userDao_impl.findCountFollowersByUsername(id);
     }
+
+    public boolean doesUsernameExist(String tempUserName) {
+        return userDao_impl.doesUsernameExist(tempUserName);
+    }
+
+    public void adjustUser(Userr user){
+        userDao_impl.edit(user);
+    }
 }
