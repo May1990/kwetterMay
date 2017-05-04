@@ -50,19 +50,19 @@ public class RestTweet extends Application{
         return result;
     }
 
-//    @GET
-//    @Path("/getTweets")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getTweets() {
-//        List<Tweet> tweets = tweetMgr.getTweets();
-//        String result = null;
-//        try {
-//            result = new ObjectMapper().writeValueAsString(tweets);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//        return result;
-//    }
+    @GET
+    @Path("/getTweets")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getTweets() {
+        List<Tweet> tweets = tweetMgr.getTweets();
+        String result = null;
+        try {
+            result = new ObjectMapper().writeValueAsString(tweets);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     @PUT
     @Path("/createTweet/{content}/{username}") //check

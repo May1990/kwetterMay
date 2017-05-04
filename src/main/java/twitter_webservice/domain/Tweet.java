@@ -1,8 +1,6 @@
 package twitter_webservice.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,9 +14,10 @@ import java.util.List;
 /**
  * Created by Anna-May on 09/03/2017.
  */
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        //scope = Userr.class,               resolver = JPAObjectIdResolver.class,
+//        property = "id")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
@@ -29,19 +28,28 @@ import java.util.List;
         @NamedQuery(name = "Tweet.tweetsById", query = "SELECT c FROM Tweet c WHERE c.owner.id = :userId")
 })
 public class Tweet implements Serializable, Comparable<Tweet> {
+    @JsonCreator
+    public Tweet(@JsonProperty("id") Long id, @JsonProperty("content") String content, @JsonProperty("owner") Userr owner){
+        this.id = id;
+        this.content = content;
+        this.owner = owner;
+        this.timeAgo = refreshTimeAgo();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date date;
     private String content;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name="LIKEDTWEETS")
     private List<Userr> likes;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "owner_id", referencedColumnName = "ID")
     private Userr owner;
@@ -123,6 +131,18 @@ public class Tweet implements Serializable, Comparable<Tweet> {
 
     public int compareTo(Tweet o) {
         return getDate().compareTo(o.getDate());
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("id: ")
+                .append(this.id).append("\n")
+                .append("content: ")
+                .append(this.content).append("\n")
+                .append("owner: ")
+                .append(this.owner).append("\n");
+        return stringBuilder.toString();
     }
 
     //    public String getUserName() {

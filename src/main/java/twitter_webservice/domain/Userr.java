@@ -13,10 +13,9 @@ import java.util.List;
 /**
  * Created by Anna-May on 09/03/2017.
  */
-
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
@@ -31,7 +30,9 @@ public class Userr implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private Long id;
 
+    @JsonIgnore
     private String password;
+    @JsonIgnore
     @ManyToMany(mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<Role> roles;
 
@@ -41,26 +42,44 @@ public class Userr implements Serializable {
     @Column(unique = true)
     private String userName;
     private String biografy;
+    @JsonIgnore
     private String locationX;
+    @JsonIgnore
     private String locationY;
     private String website;
     private String pictureUrl;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
     @JoinTable(name="FOLLOWERS")
     private List<Userr> followers;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
     @JoinTable(name="FOLLOWING")
     private List<Userr> following;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "likes", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Tweet> likedTweets;
 
     //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     //@JoinTable(name="OWNTWEETS")
+    @JsonIgnore
     @OneToMany(mappedBy = "owner", cascade ={CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Tweet> ownTweets;
+
+
+    @JsonCreator
+    public Userr(@JsonProperty("id") Long id, @JsonProperty("name") String name,  @JsonProperty("userName") String userName,
+    @JsonProperty("website") String website, @JsonProperty("pictureUrl") String pictureUrl, @JsonProperty("biografy") String biografy) {
+        this.id = id;
+        this.name = name;
+        this.userName = userName;
+        this.website = website;
+        this.biografy = biografy;
+        this.pictureUrl = pictureUrl;
+    }
 
     public Userr() {
     }
@@ -82,7 +101,7 @@ public class Userr implements Serializable {
         this.pictureUrl = pictureUrl;
     }
 
-    public Userr(String userName, List<Tweet> likedTweets) {
+    public Userr(Long id, List<Tweet> likedTweets) {
         this.userName = userName;
         this.likedTweets = likedTweets;
     }
@@ -221,6 +240,24 @@ public class Userr implements Serializable {
 
     public void addFollowing(Userr user){
         this.following.add(user);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("id: ")
+                .append(this.id).append("\n")
+                .append("name: ")
+                .append(this.name).append("\n")
+                .append("userName: ")
+                .append(this.userName).append("\n")
+                .append("website: ")
+                .append(this.website).append("\n")
+                .append("biografy: ")
+                .append(this.biografy).append("\n")
+                .append("pictureUrl: ")
+                .append(this.pictureUrl).append("\n");
+        return stringBuilder.toString();
     }
     //    @Override
 //    public int hashCode() {
