@@ -4,7 +4,6 @@ import twitter_webservice.domain.Userr;
 import twitter_webservice.service.UserMgr;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -19,7 +18,6 @@ public class UserMgrBean implements Serializable {
     @Inject
     private UserMgr userMgr;
 
-    @ManagedProperty(value="#{selectedUser}")
     private Userr selectedUser;
 
     private List<Userr> following;
@@ -142,7 +140,40 @@ public class UserMgrBean implements Serializable {
     }
     //endregion
 
-//    public String allUsers(){
+    public void countFollow(){
+        countFollowing = userMgr.getCountFollowing(selectedUser.getId());
+        countFollower = userMgr.getCountFollower(selectedUser.getId());
+    }
+
+    public void doesUsernameExist(){
+        if(userMgr.doesUsernameExist(tempUserName)){
+            usernameExist = "Username bestaat al!";
+        }else{
+            usernameExist = "";
+        }
+    }
+
+    public void refreshAtrUser(){
+        tempUserName = selectedUser.getUserName();
+        name = selectedUser.getName();
+        web = selectedUser.getWebsite();
+        bio = selectedUser.getBiografy();
+        pictureUrl = selectedUser.getPictureUrl();
+
+        countFollow();
+    }
+
+    public void adjustUser(){
+        selectedUser.setBiografy(bio);
+        selectedUser.setWebsite(web);
+        selectedUser.setName(name);
+        selectedUser.setUserName(tempUserName);
+        selectedUser.setPictureUrl(pictureUrl);
+
+        userMgr.adjustUser(selectedUser);
+    }
+
+    //    public String allUsers(){
 //        String message = "";
 //        this.users = userMgr.getUsers();
 //        if(users == null){
@@ -186,37 +217,4 @@ public class UserMgrBean implements Serializable {
 //
 //        return message;
 //    }
-
-    public void countFollow(){
-        countFollowing = userMgr.getCountFollowing(selectedUser.getId());
-        countFollower = userMgr.getCountFollower(selectedUser.getId());
-    }
-
-    public void doesUsernameExist(){
-        if(userMgr.doesUsernameExist(tempUserName)){
-            usernameExist = "Username bestaat al!";
-        }else{
-            usernameExist = "";
-        }
-    }
-
-    public void refreshAtrUser(){
-        tempUserName = selectedUser.getUserName();
-        name = selectedUser.getName();
-        web = selectedUser.getWebsite();
-        bio = selectedUser.getBiografy();
-        pictureUrl = selectedUser.getPictureUrl();
-
-        countFollow();
-    }
-
-    public void adjustUser(){
-        selectedUser.setBiografy(bio);
-        selectedUser.setWebsite(web);
-        selectedUser.setName(name);
-        selectedUser.setUserName(tempUserName);
-        selectedUser.setPictureUrl(pictureUrl);
-
-        userMgr.adjustUser(selectedUser);
-    }
 }

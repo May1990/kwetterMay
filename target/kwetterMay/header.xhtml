@@ -18,7 +18,10 @@
                 <p:menubar styleClass="headermenubar">
                     <p:submenu label="#{registerLogIn.logInUser.userName}" >
                         <p:menuitem value="Start" url="index.xhtml" />
-                        <p:menuitem value="Profiel" url="profile.xhtml" />
+                        <p:menuitem value="Profiel" action="profile.xhtml">
+                            <f:actionListener binding="#{tweetMgr.refreshProfile()}"/>
+                            <f:actionListener binding="#{tweetMgr.refreshTweets(event)}"/>
+                        </p:menuitem>
                         <p:separator />
                         <p:menuitem value="Uitloggen" url="login.xhtml" icon="ui-icon-extlink"/>
                     </p:submenu>

@@ -41,10 +41,6 @@ public class TweetMgrBean implements Serializable {
         }
         registerLogIn.refreshSizeFollow();
         refreshLastTweet();
-        ownTweetCount();
-        userMgrSelectedUser.setSelectedUser(registerLogIn.getLogInUser());
-        userMgrSelectedUser.refreshAtrUser();
-
     }
 
     //region getterSetter
@@ -117,8 +113,13 @@ public class TweetMgrBean implements Serializable {
     }
     //endregion
 
-    public void searchWordChanged()
-    {
+    public void refreshProfile(){
+        ownTweetCount();
+        userMgrSelectedUser.setSelectedUser(registerLogIn.getLogInUser());
+        userMgrSelectedUser.refreshAtrUser();
+    }
+
+    public void searchWordChanged(){
         tweets = tweetMgr.getTweetsByUserName(searchWord);
         for(Tweet tweet: tweets){
             tweet.refreshTimeAgo();
@@ -130,7 +131,17 @@ public class TweetMgrBean implements Serializable {
         refreshLastTweet();
     }
 
-    public void refreshTweets(){
+    public void refreshTweets(Object event){
+        if(userMgrSelectedUser.getSelectedUser() != null){
+            tweets = tweetMgr.getTweetsWithFollowing(userMgrSelectedUser.getSelectedUser().getUserName());
+
+            for(Tweet tweet: tweets){
+                tweet.refreshTimeAgo();
+            }
+        }
+    }
+
+    public void refreshOwnTweets(){
         if(userMgrSelectedUser.getSelectedUser() != null){
             tweets = tweetMgr.getTweetsByUserName(userMgrSelectedUser.getSelectedUser().getUserName());
 

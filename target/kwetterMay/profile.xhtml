@@ -94,13 +94,8 @@
                 <h:panelGrid id="adjustDetails">
                     <ui:fragment rendered="#{registerLogIn.logInUser.id eq userMgr.selectedUser.id}">
 
-                        <h:commandButton id="btnAdjust" value="Bewerken" update=":detailForm:detailAdjust"  onclick="next()"> <!--onclick="next()"-->
+                        <h:commandButton id="btnAdjust" value="Bewerken" update=":detailForm:detailAdjust"  onclick="next()">
                             <f:ajax execute="btnAdjust" listener="#{userMgr.adjustUser()}"/>
-                            <!--<f:setPropertyActionListener value="#{true}" target="#{userMgr.bio}" />-->
-                            <!--<c:if test="">-->
-                            <!--<f:ajax execute="btnAdjust" update=":detailForm:detail"/>-->
-                            <!--</c:if>-->
-                            <!--<f:ajax execute="btnAdjust" onevent="next()"/>-->
                         </h:commandButton>
                         <h:commandButton id="btnCancel" value="Cancel" style="display: none;" onclick="back(); resetDisableBtnAdjust()">
                             <f:ajax execute="btnCancel" listener="#{userMgr.refreshAtrUser()}" />
@@ -122,7 +117,7 @@
                     -
                     <p:commandLink id="tweetCountLink" update=":profileTweetForm :profileTweetForm:profileTweetTable" ajax="true">
                         <h:outputText value="tweets #{tweetMgr.tweetCount}" />
-                        <f:actionListener binding="#{tweetMgr.refreshTweets()}"/>
+                        <f:actionListener binding="#{tweetMgr.refreshOwnTweets()}"/>
                     </p:commandLink>
                 </h:form>
             </section>
@@ -135,7 +130,7 @@
                         <h:panelGrid columns="1" style="width:100%; text-align:center;">
                             <p:graphicImage styleClass="imageUser" style="margin:auto;" value="#{user.pictureUrl}"/>
 
-                            <p:commandLink id="cmdLink" action="#{tweetMgr.refreshTweets()}" update=":followForm :detailForm :profileTweetForm :profileTweetForm:profileTweetTable :basicInfoForm @form" ajax="true">
+                            <p:commandLink id="cmdLink" action="#{tweetMgr.refreshOwnTweets()}" update=":followForm :detailForm :profileTweetForm :profileTweetForm:profileTweetTable :basicInfoForm @form" ajax="true">
                                 <h:outputText value="#{user.userName}" />
                                 <f:setPropertyActionListener value="#{user}" target="#{userMgr.selectedUser}" />
                                 <f:actionListener binding="#{tweetMgr.profileTweetCount()}"/>
