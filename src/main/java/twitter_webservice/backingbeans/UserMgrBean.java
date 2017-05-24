@@ -34,6 +34,7 @@ public class UserMgrBean implements Serializable {
     private String name;
     private String web;
     private String bio;
+    private String pictureUrl;
 
     //region getterSetter
     public UserMgr getUserMgr() {
@@ -132,52 +133,59 @@ public class UserMgrBean implements Serializable {
         this.bio = bio;
     }
 
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
     //endregion
 
-    public String allUsers(){
-        String message = "";
-        this.users = userMgr.getUsers();
-        if(users == null){
-            message = "Internal error, geen gebruikers opgehaald.";
-        }else{
-            message = "Succeded!";
-        }
-        return message;
-    }
-
-    public String followersSelectedUser(String username){
-        String message = "";
-        this.followers = userMgr.getFollowers(username);
-        if(followers.size() == 0){
-            message = "Gebruiker heeft geen followers.";
-        }else{
-            message = "Succeded!";
-        }
-        return message;
-    }
-
-    public String followingSelectedUser(String username){
-        String message = "";
-        this.following = userMgr.getFollowing(username);
-        if(following.size() == 0){
-            message = "Gebruiker heeft geen followings.";
-        }else{
-            message = "Succeded!";
-        }
-        return message;
-    }
-
-    public String selectUserByUserName(String userName){
-        selectedUser = userMgr.getUserByUserName(userName);
-        String message = "";
-        if(selectedUser == null){
-            message = "Geen gebruiker gevonden.";
-        }else{
-            message = "Succeded!";
-        }
-
-        return message;
-    }
+//    public String allUsers(){
+//        String message = "";
+//        this.users = userMgr.getUsers();
+//        if(users == null){
+//            message = "Internal error, geen gebruikers opgehaald.";
+//        }else{
+//            message = "Succeded!";
+//        }
+//        return message;
+//    }
+//
+//    public String followersSelectedUser(String username){
+//        String message = "";
+//        this.followers = userMgr.getFollowers(username);
+//        if(followers.size() == 0){
+//            message = "Gebruiker heeft geen followers.";
+//        }else{
+//            message = "Succeded!";
+//        }
+//        return message;
+//    }
+//
+//    public String followingSelectedUser(String username){
+//        String message = "";
+//        this.following = userMgr.getFollowing(username);
+//        if(following.size() == 0){
+//            message = "Gebruiker heeft geen followings.";
+//        }else{
+//            message = "Succeded!";
+//        }
+//        return message;
+//    }
+//
+//    public String selectUserByUserName(String userName){
+//        selectedUser = userMgr.getUserByUserName(userName);
+//        String message = "";
+//        if(selectedUser == null){
+//            message = "Geen gebruiker gevonden.";
+//        }else{
+//            message = "Succeded!";
+//        }
+//
+//        return message;
+//    }
 
     public void countFollow(){
         countFollowing = userMgr.getCountFollowing(selectedUser.getId());
@@ -197,6 +205,9 @@ public class UserMgrBean implements Serializable {
         name = selectedUser.getName();
         web = selectedUser.getWebsite();
         bio = selectedUser.getBiografy();
+        pictureUrl = selectedUser.getPictureUrl();
+
+        countFollow();
     }
 
     public void adjustUser(){
@@ -204,6 +215,7 @@ public class UserMgrBean implements Serializable {
         selectedUser.setWebsite(web);
         selectedUser.setName(name);
         selectedUser.setUserName(tempUserName);
+        selectedUser.setPictureUrl(pictureUrl);
 
         userMgr.adjustUser(selectedUser);
     }

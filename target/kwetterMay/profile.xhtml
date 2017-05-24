@@ -3,8 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:cc="http://xmlns.jcp.org/jsf/composite">
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
     <h:outputStylesheet name="css/style.css"/>
     <h:outputScript name="javascript/kwetterJS.js"/>
@@ -16,9 +15,9 @@
             <section id="basicInfo">
                 <h:form id="basicInfoForm">
                     <p id="infoBasic">
-                        <h:graphicImage styleClass="imageUser" value="#{userMgr.selectedUser.pictureUrl}"/>
-                        #{userMgr.selectedUser.name}<br/>
-                        <b>#{userMgr.selectedUser.userName}</b>
+                        <h:graphicImage id="pictureBscInf" styleClass="imageUser" value="#{userMgr.pictureUrl}"/>
+                        <h:outputText id="nameBscInf" value="#{userMgr.name}" ></h:outputText><br/>
+                        <b><h:outputText id="userNameBscInf" value="#{userMgr.tempUserName}" ></h:outputText></b>
                     </p>
                 </h:form>
             </section>
@@ -58,7 +57,7 @@
                     <p:panelGrid id="detailAdjust" columns="2" styleClass="panelTable" >
                         Name:
                         <h:inputText id="nameAdjust" value="#{userMgr.name}">
-                            <f:ajax execute="nameAdjust" render=":detailForm:nameAdjust :detailForm:name" />
+                            <f:ajax execute="nameAdjust" render=":detailForm:nameAdjust :detailForm:name :basicInfoForm:nameBscInf" />
                         </h:inputText>
 
                         Web:
@@ -72,8 +71,8 @@
                         </h:inputTextarea>
 
                         Upload foto:
-                        <h:inputTextarea id="pictureAdjust" value="#{userMgr.bio}" style="height: 150px; width: 217.6px;">
-                            <f:ajax execute="pictureAdjust" render=":detailForm:bioAdjust" />
+                        <h:inputTextarea id="pictureAdjust" value="#{userMgr.pictureUrl}" style="height: 150px; width: 217.6px;">
+                            <f:ajax execute="pictureAdjust" render=":detailForm:pictureAdjust :basicInfoForm:pictureBscInf" />
                         </h:inputTextarea>
                     </p:panelGrid>
 
@@ -81,7 +80,7 @@
                         Username:
                         <h:inputText id="usernameAdjust" value="#{userMgr.tempUserName}">
                             <f:ajax execute="usernameAdjust" listener="#{userMgr.doesUsernameExist()}"/>
-                            <f:ajax execute="usernameAdjust" render=":detailForm:userNameExist :detailForm:username" onevent="userNameExist"/>
+                            <f:ajax execute="usernameAdjust" render=":detailForm:userNameExist :detailForm:username :basicInfoForm:userNameBscInf" onevent="userNameExist"/>
                         </h:inputText>
 
                         <h:outputText id="userNameExist" style="color: brown; display: none" value="#{userMgr.usernameExist}"/>
@@ -103,7 +102,7 @@
                             <!--</c:if>-->
                             <!--<f:ajax execute="btnAdjust" onevent="next()"/>-->
                         </h:commandButton>
-                        <h:commandButton id="btnCancel" value="Cancel" style="display: none;" onclick="back()">
+                        <h:commandButton id="btnCancel" value="Cancel" style="display: none;" onclick="back(); resetDisableBtnAdjust()">
                             <f:ajax execute="btnCancel" listener="#{userMgr.refreshAtrUser()}" />
                         </h:commandButton>
                     </ui:fragment>
@@ -131,7 +130,7 @@
                 <h:form id="followingForm">
                     <p:dataGrid var="user" value="#{userMgr.selectedUser.following}" columns="3" layout="grid"
                                 rows="2" paginator="true" id="following"
-                                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
                         <h:panelGrid columns="1" style="width:100%; text-align:center;">
                             <p:graphicImage styleClass="imageUser" style="margin:auto;" value="#{user.pictureUrl}"/>
@@ -140,8 +139,11 @@
                                 <h:outputText value="#{user.userName}" />
                                 <f:setPropertyActionListener value="#{user}" target="#{userMgr.selectedUser}" />
                                 <f:actionListener binding="#{tweetMgr.profileTweetCount()}"/>
-                                <f:actionListener binding="#{userMgr.countFollow()}"/>
-                                <f:ajax render="adjustDetails"/>
+                                <f:actionListener binding="#{userMgr.refreshAtrUser()}"/>
+                                <p:remoteCommand oncomplete="back()" autoRun="true"/>
+                                <c:if test="#{registerLogIn.logInUser.id ne userMgr.selectedUser.id}">
+                                    <p:remoteCommand oncomplete="blockOutAdjustBtns()" autoRun="true"/>
+                                </c:if>
                             </p:commandLink>
                         </h:panelGrid>
                     </p:dataGrid>

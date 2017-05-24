@@ -44,6 +44,7 @@ public class TweetMgrBean implements Serializable {
         ownTweetCount();
         userMgrSelectedUser.setSelectedUser(registerLogIn.getLogInUser());
         userMgrSelectedUser.refreshAtrUser();
+
     }
 
     //region getterSetter

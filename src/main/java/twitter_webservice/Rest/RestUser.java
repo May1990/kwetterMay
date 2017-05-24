@@ -164,7 +164,7 @@ public class RestUser extends Application{
     }
 
     @PUT
-    @Path("/adjustUser//{username}/{oldUsername}")
+    @Path("/adjustUserName/{username}/{oldUsername}")
     public void adjustUsername(@PathParam("username") String username,
                                        @PathParam("oldUsername") String oldUsername) {
         Userr user = userMgr.getUserByUserName(oldUsername);

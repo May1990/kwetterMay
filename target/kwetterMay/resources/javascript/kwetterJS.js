@@ -1,6 +1,5 @@
 
 var page = "";
-console.log("hoi");
 function userNameExist(){
     var elementUserExist = document.getElementById('detailForm:userNameExist');
     elementUserExist.style.display = 'block';
@@ -14,6 +13,7 @@ function next() {
         document.getElementById('detailForm:detailAdjust').style.display = 'block';
         document.getElementById('detailForm:usernameAdjustPnl').style.display = 'none';
         document.getElementById('btnCancel').style.display = 'block';
+        document.getElementById('btnCancel').value = 'Cancel';
         document.getElementById('btnAdjust').value = 'Aanpassingen verwerken';
 
         page = "details";
@@ -48,14 +48,24 @@ function back(){
 }
 
 function disabledBtnAdjust(element){
-    var btn = document.getElementById('btnAdjust');
     if(element.innerHTML == 'Username bestaat al!'){
+        var btn = document.getElementById('btnAdjust');
         if(btn != 'undefined'){
             btn.disabled = true;
         }
     }else{
-        if(btn != 'undefined'){
-            btn.disabled = false;
-        }
+        resetDisableBtnAdjust();
     }
+}
+
+function resetDisableBtnAdjust(){
+    var btn = document.getElementById('btnAdjust');
+    if(btn != 'undefined') {
+        btn.disabled = false;
+    }
+}
+
+function blockOutAdjustBtns() {
+    document.getElementById('btnAdjust').style.display = 'none';
+    document.getElementById('btnCancel').style.display = 'none';
 }
