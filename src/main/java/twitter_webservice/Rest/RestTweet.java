@@ -67,7 +67,7 @@ public class RestTweet extends Application{
     @PUT
     @Path("/createTweet/{content}/{username}") //check
     public void createTweet(@PathParam("username") String username, @PathParam("content") String content) {
-        tweetMgr.createTweet(content, username);
+        //tweetMgr.createTweet(content, username);
     }
 
     @GET

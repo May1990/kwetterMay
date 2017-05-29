@@ -7,9 +7,6 @@ import javax.ejb.MessageDriven;
 import javax.inject.Inject;
 import javax.jms.Message;
 import javax.jms.MessageListener;
-import javax.jms.TextMessage;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by Anna-May on 26/05/2017.
@@ -25,19 +22,23 @@ public class ConsumerBean implements MessageListener {
     public ConsumerBean() {
     }
 
-    public void onMessage(Message message) {
-        String userName = "";
-        String content = "";
-        TextMessage msg = (TextMessage) message;
+    public void onMessage(Message message){
 
-        try {
-            String textMsg = msg.getText();
-            int indexx = textMsg.indexOf('%');
-            userName = textMsg.substring(0, indexx);
-            content = textMsg.substring(indexx +1 , textMsg.length());
-            tweetMgr.createTweet(content, userName);
-        } catch (Exception ex) {
-            Logger.getLogger(ConsumerBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
+
+//    public void onMessage(Message message) {
+//        String userName = "";
+//        String content = "";
+//        TextMessage msg = (TextMessage) message;
+//
+//        try {
+//            String textMsg = msg.getText();
+//            int indexx = textMsg.indexOf('%');
+//            userName = textMsg.substring(0, indexx);
+//            content = textMsg.substring(indexx +1 , textMsg.length());
+//            tweetMgr.createTweet(content, userName);
+//        } catch (Exception ex) {
+//            Logger.getLogger(ConsumerBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

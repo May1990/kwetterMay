@@ -89,7 +89,8 @@ public class TweetMgrTest {
         String content = "Van Afrika tot in Amerika, het is zoveel mooier als we samen zijn.";
 
         em.getTransaction().begin();
-        Tweet tweet = tweetMgr.createTweet(content, testData.getUserThree().getUserName());
+        Tweet tweet = null;
+        //Tweet tweet = tweetMgr.createTweet(content, testData.getUserThree().getUserName());
         em.getTransaction().commit();
 
         assertNotNull(tweet.getId());

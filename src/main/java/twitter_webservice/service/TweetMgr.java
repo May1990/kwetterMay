@@ -88,10 +88,12 @@ public class TweetMgr {
 
     }
 
-    public Tweet createTweet(String content, String username) {
+    public Tweet createTweet(String content, String username, Object tweetBean) {
         Userr user = userDao_impl.findByUserName(username);
         Tweet tweet = new Tweet(new Date(), content, user);
-        return tweetDao_impl.create(tweet);
+        tweet = tweetDao_impl.create(tweet);
+
+        return tweet;
     }
 
     public List<Tweet> getTweets(){
