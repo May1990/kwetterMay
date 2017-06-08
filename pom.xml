@@ -23,6 +23,13 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
+    </dependency>
+
     <dependency>
       <groupId>javax.faces</groupId>
       <artifactId>jsf-api</artifactId>
@@ -134,13 +141,84 @@
       <version>1.13.1</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.atmosphere/atmosphere-runtime -->
+    <!-- https://mvnrepository.com/artifact/org.richfaces/richfaces -->
     <dependency>
-      <groupId>org.atmosphere</groupId>
-      <artifactId>atmosphere-runtime</artifactId>
-      <version>2.4.6</version>
+      <groupId>org.richfaces</groupId>
+      <artifactId>richfaces</artifactId>
+      <version>4.5.17.Final</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.richfaces/richfaces-a4j -->
+    <dependency>
+      <groupId>org.richfaces</groupId>
+      <artifactId>richfaces-a4j</artifactId>
+      <version>4.5.17.Final</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.richfaces.ui</groupId>
+      <artifactId>richfaces-components-ui</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.richfaces.core</groupId>
+      <artifactId>richfaces-core-impl</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.googlecode.json-simple</groupId>
+      <artifactId>json-simple</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.atmosphere/atmosphere-runtime &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.atmosphere</groupId>-->
+      <!--<artifactId>atmosphere-runtime</artifactId>-->
+      <!--<version>2.2.3</version>&lt;!&ndash;<version>2.4.6</version>&ndash;&gt;-->
+    <!--</dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/org.atmosphere/atmosphere-runtime -->
+    <!--<dependency>-->
+      <!--<groupId>org.atmosphere</groupId>-->
+      <!--<artifactId>atmosphere-runtime</artifactId>-->
+      <!--<version>2.4.8</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.atmosphere</groupId>-->
+      <!--<artifactId>atmosphere-jersey</artifactId>-->
+      <!--<version>2.4.8</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>eu.infomas</groupId>-->
+      <!--<artifactId>annotation-detector</artifactId>-->
+      <!--<version>3.0.1</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.omnifaces</groupId>-->
+      <!--<artifactId>omnifaces</artifactId>-->
+      <!--<version>2.6.2</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.jboss.weld.servlet</groupId>-->
+      <!--<artifactId>weld-servlet-core</artifactId>-->
+      <!--<version>2.4.3.Final</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.jboss.weld.servlet</groupId>-->
+      <!--<artifactId>weld-servlet</artifactId>-->
+      <!--<version>2.4.3.Final</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.jboss.weld.se</groupId>-->
+      <!--<artifactId>weld-se</artifactId>-->
+      <!--<version>2.2.6.Final</version>-->
+    <!--</dependency>-->
 
   </dependencies>
 

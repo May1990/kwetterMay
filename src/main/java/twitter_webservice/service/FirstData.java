@@ -20,15 +20,15 @@ public class FirstData {
 
     @PostConstruct
     public void init(){
-        testData = new TestData();
-        em = emf.createEntityManager();
-
-        testData.fillTestDataTweet();
-        testData.fillTestDataUserr();
-        em.persist(testData.getRole());
-        em.persist(testData.getUserOne());
-        em.persist(testData.getUserTwo());
-        em.persist(testData.getUserThree());
-        em.persist(testData.getUserFour());
+//        testData = new TestData();
+//        em = emf.createEntityManager();
+//
+//        testData.fillTestDataTweet();
+//        testData.fillTestDataUserr();
+//        em.persist(testData.getRole());
+//        em.persist(testData.getUserOne());
+//        em.persist(testData.getUserTwo());
+//        em.persist(testData.getUserThree());
+//        em.persist(testData.getUserFour());
     }
 }

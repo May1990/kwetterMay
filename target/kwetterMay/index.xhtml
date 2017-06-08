@@ -21,10 +21,13 @@
         <div id="start">
             <section id="happening">
                 <h3>What's happening?</h3>
-                <h:form>
+                <h:form id="happeningForm">
+                    <h:inputHidden id="hiddenInput" value="#{registerLogIn.username}"/> <!--valueChangeListener="#{tweetMgr.updateOnMessage}"-->
                     <h:inputTextarea id="newTweet" a:maxlength="140" styleClass="inputTweet" value="#{tweetMgr.newTweetContent}" onkeypress="if (event.keyCode == 13) {event.target.blur();event.stopPropagation();return false;} else {return true;};">
                         <f:ajax event="change" execute="newTweet" render=":myTweetForm" listener="#{tweetMgr.addNewTweet}"/>
+                        <f:ajax event="change" execute="newTweet" onevent="sendMessage()"/>
                     </h:inputTextarea>
+                    <p:remoteCommand onstart="setUsername();loadWebsocket()" autoRun="true"/>
                 </h:form>
 
                 <h:form id="tableForm">

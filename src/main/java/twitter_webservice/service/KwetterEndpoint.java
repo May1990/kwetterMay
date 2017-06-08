@@ -2,6 +2,7 @@ package twitter_webservice.service;
 
 import twitter_webservice.domain.Userr;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -18,6 +19,7 @@ import java.util.logging.Logger;
 /**
  * Created by Anna-May on 27/05/2017.
  */
+@Stateless
 @ServerEndpoint("/kwetterWeb/{username}")
 public class KwetterEndpoint {
     private static final Logger LOG = Logger.getLogger(KwetterEndpoint.class.getName());
@@ -36,7 +38,7 @@ public class KwetterEndpoint {
     public String onTextMessage(String message, @PathParam("username") String username){
         Userr user = userMgr.getUserByUserName(username);
         List<Userr> users = userMgr.getFollowers(username);
-        users.addAll(userMgr.getFollowing(username));
+//        users.addAll(userMgr.getFollowing(username));
         LOG.info(username + " message: " + message);
 
         for (Userr follow: users) {
@@ -50,7 +52,7 @@ public class KwetterEndpoint {
             }
         }
 
-        return "awsome";
+        return message;
     }
 
     @OnClose

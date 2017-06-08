@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.richfaces.core:richfaces-core-impl:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/richfaces/core/richfaces-core-impl/unknown/richfaces-core-impl-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/richfaces/core/richfaces-core-impl/unknown/richfaces-core-impl-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/richfaces/core/richfaces-core-impl/unknown/richfaces-core-impl-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -2,7 +2,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a4j="http://richfaces.org/a4j">
 <h:head>
     <h:outputStylesheet name="css/style.css"/>
     <h:outputScript name="javascript/kwetterJS.js"/>
@@ -10,8 +11,9 @@
 <h:body>
     <section id="container">
         <div id="registerlogin">
-            <section id="logIn">
-                <h:form method="POST" action="j_security_check">
+            <section id="logIn" >
+                <h:form id="logInForm" method="POST" action="j_security_check" >
+                    <!--<h:inputHidden id="hiddenInput" value="#{registerLogIn.username}" /> &lt;!&ndash;valueChangeListener="#{tweetMgr.updateOnMessage}"&ndash;&gt;-->
                     <!--<p:panelGrid columns="2">-->
                         <!--Username:-->
                         <!--<h:inputText id="j_username" size="30" ></h:inputText>-->
@@ -23,44 +25,55 @@
 
                     <p:panelGrid columns="2" styleClass="panelTable">
                         Username:
-                        <h:inputText value="#{registerLogIn.username}" size="30" ></h:inputText>
+                        <h:inputText id="userNameInput" value="#{registerLogIn.username}" size="30" > <!--onchange="" onkeypress="if (event.keyCode == 13) {event.target.blur();event.stopPropagation();return false;} else {return true;};"-->
+                            <!--<f:ajax event="change" execute="userNameInput" render=":logInForm:hiddenInput" /> &lt;!&ndash;onevent="setUsername"&ndash;&gt;-->
+                        </h:inputText>
 
                         Password:
                         <h:inputSecret value="#{registerLogIn.password}" size="30" ></h:inputSecret>
                     </p:panelGrid>
-                    <h:commandButton value="log in" action="#{registerLogIn.logInUserByUserName}" />
-                </h:form>
-            </section>
+                    <!--<h:commandButton id="loginBtn" value="log in" action="" actionListener="">-->
+                        <!--&lt;!&ndash;<f:ajax execute="loginBtn" onevent="logIn(#{registerLogIn.username})"/>&ndash;&gt;-->
+                    <!--</h:commandButton>-->
+                    <!--<p:commandButton id="loginBtn" value="Log in" action="#{registerLogIn.logInUserByUserName()}" oncomplete="logIn()">-->
+                    <!--</p:commandButton>-->
+                    <h:commandButton id="loginBtn" value="Log in" actionListener="#{registerLogIn.logInUserByUserName()}"> <!--action="#{registerLogIn.logInUserByUserName()}" oncomplete="logIn()"-->
+                        <!--<f:ajax execute="loginBtn" onevent="(function(){window.username = #{registerLogIn.logInUser.getUserName()};})();"></f:ajax>-->
+                        <!--<f:ajax execute="loginBtn" onevent="setUsername"></f:ajax>-->
+                        <!--<f:ajax execute="loginBtn" listener="#{registerLogIn.logInUserByUserName()}"></f:ajax>-->
+                    </h:commandButton>
+                    </h:form>
+                </section>
 
-            <section id="register">
-                <h:form>
-                    <p:panelGrid columns="2" styleClass="panelTable">
-                        Name:
-                        <h:inputText id="name" value="#{registerLogIn.name}" ></h:inputText>
+                <section id="register">
+                    <h:form>
+                        <p:panelGrid columns="2" styleClass="panelTable">
+                            Name:
+                            <h:inputText id="name" value="#{registerLogIn.name}" ></h:inputText>
 
-                        Username:
-                        <h:inputText id="regUsername" value="#{registerLogIn.regUsername}" ></h:inputText>
+                            Username:
+                            <h:inputText id="regUsername" value="#{registerLogIn.regUsername}" ></h:inputText>
 
-                        Password:
-                        <h:inputText id="regPassword" value="#{registerLogIn.regPassword}" ></h:inputText>
+                            Password:
+                            <h:inputText id="regPassword" value="#{registerLogIn.regPassword}" ></h:inputText>
 
-                        Confirm Password:
-                        <h:inputText id="regPasswordCnfrm" value="#{registerLogIn.regPasswrdCnfrm}" ></h:inputText>
+                            Confirm Password:
+                            <h:inputText id="regPasswordCnfrm" value="#{registerLogIn.regPasswrdCnfrm}" ></h:inputText>
 
-                        Email:
-                        <h:inputText id="email" value="#{registerLogIn.email}" ></h:inputText>
+                            Email:
+                            <h:inputText id="email" value="#{registerLogIn.email}" ></h:inputText>
 
-                        Confirm email:
-                        <h:inputText id="emailCnfrm" value="#{registerLogIn.emailCnfrm}" ></h:inputText>
+                            Confirm email:
+                            <h:inputText id="emailCnfrm" value="#{registerLogIn.emailCnfrm}" ></h:inputText>
 
-                        Website:
-                        <h:inputText id="website" value="#{registerLogIn.website}" ></h:inputText>
-                    </p:panelGrid>
-                    <!--<h:commandButton action="#{registerLogIn.ping}" value="register"></h:commandButton>-->
-                    <h:commandButton value="Register" action="#{registerLogIn.registerUser}"/>
-                </h:form>
-            </section>
-        </div>
-    </section>
-</h:body>
-</html>
+                            Website:
+                            <h:inputText id="website" value="#{registerLogIn.website}" ></h:inputText>
+                        </p:panelGrid>
+                        <h:commandButton value="Register" action="#{registerLogIn.registerUser}"/>
+                    </h:form>
+                </section>
+            </div>
+        </section>
+
+    </h:body>
+    </html>

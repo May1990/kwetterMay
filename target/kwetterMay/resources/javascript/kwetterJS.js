@@ -69,3 +69,69 @@ function blockOutAdjustBtns() {
     document.getElementById('btnAdjust').style.display = 'none';
     document.getElementById('btnCancel').style.display = 'none';
 }
+
+var host = "ws://localhost:8080/kwetterMay/kwetterWeb/";
+var wSocket;
+var browserSupport;
+var elementHidden;
+var username;
+var sendMessage;
+
+function setUsername(){
+    debugger;
+    elementHidden = document.getElementById('happeningForm:hiddenInput');
+    // elementHidden = document.getElementById('logInForm:userNameInput');
+    username = elementHidden.value;
+    console.log(username);
+    elementHidden = null;
+}
+
+// called  body onLoad()
+function loadWebsocket()//username
+{
+    debugger;
+    wSocket = new WebSocket(host+username);
+    browserSupport = ("WebSocket" in window) ? true : false;
+
+    if (browserSupport)
+    {
+        wSocket.onopen = function()
+        {
+            console.log("websocket has opened!");
+        };
+
+        // called when a message is received
+        wSocket.onmessage = function(event)
+        {
+            debugger;
+            var received_msg = event.data;
+            var message = JSON.parse(received_msg);
+            console.log(username+ " ontvangt " + message.data + " van " + message.from );
+        };
+
+        // called when socket closes
+        wSocket.onclose = function()
+        {
+            // websocket is closed.
+            console.log("Connection is closed...");
+        };
+    }
+    else
+    {
+        // The browser doesn't support WebSocket
+        alert("WebSocket is NOT supported by your Browser!");
+    }
+
+    sendMessage = function () {
+        wSocket.send(JSON.stringify({
+            from: username,
+            data: document.getElementById("happeningForm:newTweet").value
+        }));
+    }
+
+    // document.getElementById("happeningForm:newTweet").
+}
+
+
+
+

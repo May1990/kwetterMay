@@ -4,11 +4,13 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
+      <!--xmlns:o="http://omnifaces.org/ui"-->
+      <!--xmlns:of="http://omnifaces.org/functions">-->
 <h:head>
     <h:outputStylesheet name="css/style.css"/>
     <h:outputScript name="javascript/kwetterJS.js"/>
 </h:head>
-<h:body>
+<h:body > <!--onload="initializeReception()"-->
     <section id="container">
         <ui:include src="header.xhtml" />
         <div id="profile">
@@ -146,12 +148,20 @@
             </section>
         </div>
     </section>
+    <!--<o:socket channel="pushChannel" onmessage="pushCommandScript" />-->
+    <!--<o:commandScript name="pushCommandScript"-->
+                     <!--action="#{tweetMgr.updateOnMessage()}" />-->
+    <!--<o:socket onMessage="#{tweetMgr.updateOnMessage()}" channel="/kwetterWeb/{username}"></o:socket>-->
     <!--<p:socket channel="/onMessageEvent" >-->
-        <!--<p:ajax event="message" oncomplete="#{tweetMgr.updateOnMessage()}" />-->
+        <!--<p:ajax event="message" oncomplete="#{tweetMgr.updateOnMessage()}" /> &lt;!&ndash;oncomplete="#{tweetMgr.updateOnMessage()}"&ndash;&gt;-->
     <!--</p:socket>-->
     <!--&lt;!&ndash;<p:socket onOpen="#{tweetMgr.updateOnMessage()}" channel="/kwetterWeb/{username}"/> &lt;!&ndash;autoConnect="false" widgetVar='subscriber'&ndash;&gt;&ndash;&gt;-->
     <!--&lt;!&ndash;<p:socket onClose="#{tweetMgr.updateOnMessage()}" channel="/kwetterWeb/{username}"/>&ndash;&gt;-->
     <!--<p:socket onMessagePublished="#{tweetMgr.updateOnMessage()}" channel="/kwetterWeb/{username}"/>-->
     <!--<p:socket onMessage="#{tweetMgr.updateOnMessage()}" channel="/kwetterWeb/{username}"/>-->
+    <!--<f:websocket channel="clock" onmessage="socketListener" />-->
+    <!--<h:form>-->
+        <!--<p:remoteCommand name="updateMenu" update=":profileTweetForm" />-->
+    <!--</h:form>-->
 </h:body>
 </html>

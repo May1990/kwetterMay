@@ -88,7 +88,7 @@ public class TweetMgr {
 
     }
 
-    public Tweet createTweet(String content, String username, Object tweetBean) {
+    public Tweet createTweet(String content, String username) {
         Userr user = userDao_impl.findByUserName(username);
         Tweet tweet = new Tweet(new Date(), content, user);
         tweet = tweetDao_impl.create(tweet);

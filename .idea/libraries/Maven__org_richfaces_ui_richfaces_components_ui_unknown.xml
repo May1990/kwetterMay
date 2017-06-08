@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.richfaces.ui:richfaces-components-ui:unknown">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/richfaces/ui/richfaces-components-ui/unknown/richfaces-components-ui-unknown.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/richfaces/ui/richfaces-components-ui/unknown/richfaces-components-ui-unknown-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/richfaces/ui/richfaces-components-ui/unknown/richfaces-components-ui-unknown-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

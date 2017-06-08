@@ -159,20 +159,28 @@ public class RegisterLogInBean implements Serializable {
         return nextPage;
     }
 
-    public String logInUserByUserName(){
-        String nextPage = "";
+    public void logInUserByUserName(){
+//        String nextPage = "";
+        try {
         if(username!= ""){
             logInUser = userMgr.getUserByUserName(username);
             if(logInUser == null){
-                nextPage = "login_error";
+
+                    this.redirectError();
+
+//                nextPage = "login_error";
             }else{
-                nextPage = "index";
+                this.redirectStart();
+//                nextPage = "index";
             }
         }else{
-            nextPage = "login_error";
+            this.redirectError();
+//            nextPage = "login_error";
         }
-
-        return nextPage;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        return nextPage;
     }
 
     public void refreshSizeFollow(){
@@ -194,5 +202,20 @@ public class RegisterLogInBean implements Serializable {
     public void redirect() throws IOException {
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         externalContext.redirect("login.xhtml");
+    }
+
+    public void redirectStart() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("index.xhtml");
+    }
+
+    public void redirectProfile() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("profile.xhtml");
+    }
+
+    public void redirectError() throws IOException {
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("login_error.xhtml");
     }
 }

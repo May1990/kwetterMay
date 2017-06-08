@@ -1,19 +1,17 @@
 package twitter_webservice.backingbeans;
 
 import twitter_webservice.domain.Tweet;
-import twitter_webservice.service.KwetterWebSocket;
-import twitter_webservice.service.TweetMgr;
-import twitter_webservice.service.UserMgr;
+import twitter_webservice.service.*;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.event.Observes;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.websocket.Session;
+import javax.websocket.WebSocketContainer;
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  * Created by Anna-May on 08/04/2017.
@@ -27,10 +25,14 @@ public class TweetMgrBean implements Serializable {
     private Tweet lastTweet;
     private int tweetCount;
     private String tweetsGroupSelect;
-    private KwetterWebSocket webSocket;
+
+    private WebSocketContainer container;
 
     @Inject
-    Event<UpdateTweetsEvent> events;
+    private KwetterEndpointClient endpointClient;
+    private Session connectToServer;
+//    @Inject
+//    Event<UpdateTweetsEvent> events;
 
     @Inject
     private UserMgr userMgr;
@@ -50,12 +52,15 @@ public class TweetMgrBean implements Serializable {
         }
         registerLogIn.refreshSizeFollow();
         refreshLastTweet();
-        try {
-            webSocket =  new KwetterWebSocket();
-            webSocket.openConnection(registerLogIn.getLogInUser().getUserName());
-        } catch (Exception ex) {
-            Logger.getLogger(TweetMgrBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            //endpointClient.setval(this, FacesContext.getCurrentInstance().getPartialViewContext());
+//            //endpointClient = new KwetterEndpointClient();
+//            this.container = ContainerProvider.getWebSocketContainer();
+//            // open connection
+//            connectToServer = this.container.connectToServer(this.endpointClient, new URI("ws://localhost:8080/kwetterMay/kwetterWeb/" + this.registerLogIn.getLogInUser().getUserName()));
+//        } catch (Exception ex) {
+//            Logger.getLogger(TweetMgrBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     //region getterSetter
@@ -142,13 +147,14 @@ public class TweetMgrBean implements Serializable {
     }
 
     public void addNewTweet(){
-        tweetMgr.createTweet(newTweetContent, registerLogIn.getLogInUser().getUserName(), this);
+        tweetMgr.createTweet(newTweetContent, registerLogIn.getLogInUser().getUserName());
         refreshLastTweet();
-        try {
-            webSocket.sendTweetToServer(registerLogIn.getLogInUser().getUserName(), newTweetContent, this);
-        } catch (Exception ex) {
-            Logger.getLogger(TweetMgrBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            this.endpointClient.sendMessage(newTweetContent);
+//            //webSocket.sendTweetToServer(registerLogIn.getLogInUser().getUserName(), newTweetContent, this);
+//        } catch (Exception ex) {
+//            Logger.getLogger(TweetMgrBean.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public void refreshTweets(Object event){
@@ -202,8 +208,8 @@ public class TweetMgrBean implements Serializable {
         }
     }
 
-    public void updateTweets(@Observes UpdateTweetsEvent updateTweetsEvent){
-        Logger.getAnonymousLogger().info("Received Event: "+ updateTweetsEvent.getClass().getName());
+//    public void updateTweets(@Observes UpdateTweetsEvent updateTweetsEvent){
+//        Logger.getAnonymousLogger().info("Received Event: "+ updateTweetsEvent.getClass().getName());
 //        Logger.getLogger(TweetMgrBean.class.getName()).info("user past... "+ registerLogIn.getLogInUser().getUserName());
 //        System.out.println("HelloEvent: " + updateTweetsEvent);
 //
@@ -227,15 +233,49 @@ public class TweetMgrBean implements Serializable {
 //        if(tweetsGroupSelect!=null){
 //            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(":profileTweetForm");
 //        }
-    }
-
-    public void updateOnMessage(){
-        events.fire(new UpdateTweetsEvent("from bean " + System.currentTimeMillis()));
-    }
+//    }
 
 //    public void updateOnMessage(){
-//
-//
-//        //FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(":tableForm");
+//        events.fire(new UpdateTweetsEvent("from bean " + System.currentTimeMillis()));
 //    }
+//@Observes UpdateTweetsEvent updateTweetsEvent
+
+
+//    private PushServlet psuh;
+//    @Inject
+//    @Notify
+//    private EventUpdateHandler eventUpdateHandler;
+//
+//    @Inject
+//    private UpdateTweetsEvent updateTweetsEvent;
+
+    public void updateOnMessage(){
+        //Logger.getAnonymousLogger().info("Received Event: "+ updateTweetsEvent.getClass().getName());
+        Logger.getLogger(TweetMgrBean.class.getName()).info("user past... "+ registerLogIn.getLogInUser().getUserName());
+        //System.out.println("HelloEvent: " + updateTweetsEvent);
+
+        if(tweetsGroupSelect == "follower"){
+            profileTweetsFollower();
+        }else if( tweetsGroupSelect == "withFollowing"){
+            refreshTweets(null);
+        }else if( tweetsGroupSelect == "following"){
+            profileTweetsFollowing();
+        }else if( tweetsGroupSelect == "ownTweets"){
+            refreshOwnTweets();
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Logger.getLogger(TweetMgrBean.class.getName()).info("user past... "+ registerLogIn.getLogInUser().getUserName());
+        if(tweetsGroupSelect!=null){
+            FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(":profileTweetForm");
+        }
+
+
+        //FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(":tableForm");
+    }
 }

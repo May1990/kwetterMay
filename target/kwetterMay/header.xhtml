@@ -16,7 +16,7 @@
             </c:if>
             <c:otherwise>
                 <p:menubar styleClass="headermenubar">
-                    <p:submenu label="#{registerLogIn.logInUser.userName}" >
+                    <p:submenu id="submenu" label="#{registerLogIn.logInUser.userName}" >
                         <p:menuitem value="Start" url="index.xhtml" />
                         <p:menuitem value="Profiel" action="profile.xhtml">
                             <f:actionListener binding="#{tweetMgr.refreshProfile()}"/>
